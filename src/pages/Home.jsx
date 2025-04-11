@@ -55,8 +55,8 @@ const Home = () => {
       <div className='container mx-auto py-12 p-5 m-4'>
         <h2 className='text-2xl font-bold mb-6 text-center'>Top Products</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6'>
-            {products.products.slice(0,5).map((product)=>(
-                <ProductCart product={product}/>
+            {products.products.slice(0,5).map((product,index)=>(
+                <ProductCart key={index} product={product}/>
             ))}
         </div>
       </div>

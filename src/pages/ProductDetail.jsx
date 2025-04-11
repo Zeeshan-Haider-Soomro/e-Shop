@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { FaCarSide, FaQuestion } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
+import { toast, ToastContainer } from "react-toastify";
+
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -16,11 +18,13 @@ const ProductDetail = () => {
     const handleAddToCart = () => {
         if (product && quantity > 0) {
             dispatch(AddToCart({ ...product, quantity }));
+                toast.success("Product added to cart!");
         }
     };
 
     const handleBuyNow = () => {
         handleAddToCart(); // 👈 Pehle cart mein daalo
+            toast.success("Product added to cart!");
         navigate('/check-out'); // 👈 Then navigate
     };
 
@@ -32,7 +36,10 @@ const ProductDetail = () => {
     if (!product) return <div className="text-center py-10 text-gray-600">Loading...</div>;
 
     return (
-        <div className="max-w-5xl mx-auto px-4 py-12">
+        <div className='p-5'>
+            <ToastContainer position="top-right" autoClose={2000} />
+        
+        <div className="max-w-4xl mx-auto px-4 py-12">
             <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="flex items-center justify-center">
                     <img
@@ -56,12 +63,12 @@ const ProductDetail = () => {
                                 defaultValue="1"
                                 className="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                             />
-                            <button onClick={handleAddToCart} className="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition duration-200">
+                            <button onClick={handleAddToCart} className="px-5 py-2 bg-black text-white rounded-lg hover:bg-white hover:text-black border-2 border-black transition duration-200 cursor-pointer">
                                 Add to Cart
                             </button>
                             <button
                                 onClick={handleBuyNow}
-                                className="px-5 py-2 border border-black text-black rounded-lg hover:bg-gray-100 transition duration-200"
+                                className="px-5 py-2 border-2 border-black text-black rounded-lg transition duration-200 cursor-pointer hover:bg-black hover:text-white"
                             >
                                 Buy Now
                             </button>
@@ -79,8 +86,6 @@ const ProductDetail = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-
             <div className="mt-12">
                 <h3 className="text-2xl font-semibold mb-4">Product Description</h3>
                 <p className="text-gray-700 leading-relaxed text-base">
@@ -88,6 +93,9 @@ const ProductDetail = () => {
                     adipisicing elit. Distinctio, porro voluptatibus reiciendis error unde velit.
                 </p>
             </div>
+            </div>
+
+        </div>
         </div>
     );
 };

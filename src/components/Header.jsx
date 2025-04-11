@@ -16,7 +16,7 @@ import Register from "./Register";
 import { setSearchTerm } from "@/redux/ProductSlice";
 
 const Header = () => {
-  const products = useSelector((state) => state.cart.products);
+  const products = useSelector((state) => state.cart.products || []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [search, setSearch] = useState();
@@ -96,7 +96,7 @@ const Header = () => {
             <Link to="/cart" className="relative">
               <FaShoppingCart className="text-2xl text-[#003366] transition" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                {products.length > 0 ? products.length : "0"}
+                {products.length || 0}
               </span>
             </Link>
 
