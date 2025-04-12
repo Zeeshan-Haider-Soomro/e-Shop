@@ -1,9 +1,18 @@
-import React from 'react'
-import { useNavigate, useOutletContext } from 'react-router'
+import React from 'react';
+import { useNavigate, useOutletContext } from 'react-router';
 
 const Order = () => {
-  const { order } = useOutletContext()
-  const navigate = useNavigate()
+  const { order } = useOutletContext();
+  const navigate = useNavigate();
+
+  // Ensure order exists before rendering
+  if (!order) {
+    return (
+      <div className="text-center text-red-600">
+        <p>Order details not available. Please try again later.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-md rounded-2xl mb-10">
@@ -55,7 +64,7 @@ const Order = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Order
+export default Order;

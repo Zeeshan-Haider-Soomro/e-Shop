@@ -8,7 +8,7 @@ import { decreaseQuantity, increaseQuantity, removeFromCart } from '@/redux/Cart
 import { useNavigate } from 'react-router';
 
 const AddToCart = () => {
-    const cart = useSelector(state => state.cart);
+    const cart = useSelector(state => state.cart || { products: [], totalPrice: 0, totalQuantity: 0 });
     const dispatch = useDispatch();
     const [address, setAddress] = useState("johar, block #18, karachi, sindh")
     const [isModalOpen,setIsModalOpen] = useState(false)
@@ -16,7 +16,7 @@ const AddToCart = () => {
 
     return (
         <div className="max-w-6xl mx-auto p-6">
-            {cart.products.length > 0 ? (
+            {cart?.products?.length > 0 ? (
                <div>
                  <div className="bg-white shadow-lg rounded-lg p-6">
                     <h3 className="text-2xl font-bold mb-4">Shopping Cart</h3>
